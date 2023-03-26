@@ -16,7 +16,12 @@ class TokenService {
         if (token === 'null') {
             return res.status(401).send('Request no autorizado');
         }
+        // const tokenTime = req._startAt[0]; 
+        // if(tokenTime === 0){
+        //     return res.status(401).send('Request no autorizado, token vencido')
+        // }
         const payload = jsonwebtoken_1.default.verify(token, 'secretkey');
+        console.log(payload);
         req.userId = payload._id;
         next();
     }

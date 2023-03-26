@@ -1,12 +1,15 @@
-import mysql from 'promise-mysql2';
+import { Sequelize } from "sequelize";
 import keys from './keys';
 
-const pool= mysql.createPool(keys.database);
+const sequelize = new Sequelize(
+    keys.database.database, 
+    keys.database.user, 
+    keys.database.password, 
+    {
+        host: keys.database.host,
+        dialect: 'mysql'
+    }
+)
 
-pool.getConnection()
-    .then(conn => {
-        pool.releaseConnection(conn);
-        console.log('DB connected');
-    })
+export default sequelize;
 
-export default pool;

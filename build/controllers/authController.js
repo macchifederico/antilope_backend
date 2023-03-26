@@ -4,43 +4,61 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authController = void 0;
-const database_1 = __importDefault(require("../database"));
+// import pool from "../database";
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const Cliente_1 = require("../models/Cliente");
 class AuthController {
     async registro(req, res) {
-        const cliente = await database_1.default.query('INSERT INTO clientes SET ?', [req.body]);
-        const token = jsonwebtoken_1.default.sign({ _id: cliente.id }, 'secretkey');
-        res.status(200).json({ token });
-        res.json({
+        const { nombre, apellido, email, password } = req.body;
+        const newCliente = await Cliente_1.Cliente.create({
+            nombre,
+            apellido,
+            email,
+            password
+        });
+        const token = jsonwebtoken_1.default.sign({ _id: newCliente.id }, 'secretkey');
+        res.status(200).send({
+            token,
             text: "Registro Exitoso"
         });
     }
     async login(req, res, next) {
         const { email, password } = req.body;
-        const [rows] = await database_1.default.query('SELECT * FROM clientes WHERE email = ?', [email]);
-        const result = JSON.parse(JSON.stringify(rows));
-        if (result.length > 0) {
-            if (result[0].email === email && result[0].password === password) {
-                const token = jsonwebtoken_1.default.sign({ _id: result[0].id }, 'secretkey');
+        if (!email || !password) {
+            res.status(500).send({
+                text: "Es necesario usuario y password para loguearse"
+            });
+        }
+        else {
+            const result = await Cliente_1.Cliente.findOne({
+                where: {
+                    email: email,
+                    password: password
+                }
+            });
+            if (result?.dataValues) {
+                const token = jsonwebtoken_1.default.sign({ _id: result.dataValues.id }, 'secretkey');
+                //poner secretKey en una variable de .env
                 jsonwebtoken_1.default.verify(token, 'secretkey', (err, _user) => {
                     if (err) {
-                        res.send('Token denegado');
+                        res.status(500).send('Token denegado');
                     }
                     else {
                         next();
                     }
                 });
-                res.send({
+                res.status(200).send({
                     text: "Usuario logueado con exito",
                     token: token
                 });
             }
             else {
-                res.json({
+                res.status(500).send({
                     text: "Usuario o password invalidos"
                 });
             }
         }
+        // const [rows] = await pool.query('SELECT * FROM clientes WHERE email = ?', [email]);
     }
 }
 exports.authController = new AuthController();

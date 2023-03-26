@@ -13,9 +13,9 @@ class ProductosRoutes {
     config() {
         this.router.get('/', productosController_1.default.list);
         this.router.get('/:id', productosController_1.default.getOne);
-        this.router.post('/', productosController_1.default.create);
-        this.router.put('/:id', productosController_1.default.update);
-        this.router.delete('/:id', productosController_1.default.delete);
+        // this.router.post('/', productosController.create);
+        // this.router.put('/:id', productosController.update);
+        // this.router.delete('/:id', productosController.delete);
     }
 }
 const productosRoutes = new ProductosRoutes();

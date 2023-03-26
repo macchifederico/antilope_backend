@@ -3,6 +3,6 @@ export default {
         host: 'localhost',
         user: 'root',
         password: 'root',
-        database: 'antilope'
+        database: 'antilope2'
     }
 }
