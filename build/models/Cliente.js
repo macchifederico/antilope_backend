@@ -18,6 +18,15 @@ exports.Cliente = database_1.default.define('clientes', {
     apellido: {
         type: sequelize_1.DataTypes.STRING
     },
+    dni: {
+        type: sequelize_1.DataTypes.INTEGER
+    },
+    telefono: {
+        type: sequelize_1.DataTypes.INTEGER
+    },
+    esCelular: {
+        type: sequelize_1.DataTypes.BOOLEAN
+    },
     email: {
         type: sequelize_1.DataTypes.STRING
     },

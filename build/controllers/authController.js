@@ -49,7 +49,8 @@ class AuthController {
                 });
                 res.status(200).send({
                     text: "Usuario logueado con exito",
-                    token: token
+                    token: token,
+                    id: result.dataValues.id
                 });
             }
             else {

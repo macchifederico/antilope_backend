@@ -12,6 +12,7 @@ import authRoutes from './routes/authRoutes';
 import homeRoutes from './routes/homeRoutes';
 import categoryRoutes from './routes/categoryRoutes';
 import carritoRoutes from './routes/carritoRoutes';
+import clienteRoutes from './routes/clienteRoutes';
 
 //Importo modelos para bbdd
 import './models/Carrito';
@@ -48,6 +49,7 @@ class Server {
         this.app.use('/home', homeRoutes);
         this.app.use('/categorias', categoryRoutes);
         this.app.use('/carrito', carritoRoutes);
+        this.app.use('/cliente', clienteRoutes)
     }
 
     start(): void{

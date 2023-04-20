@@ -1,30 +1,28 @@
 import { Request, Response } from "express";
-import pool from '../database';
 
 import { Carrito } from "../models/Carrito";
 
 class CarritoController{
 
     public async list (req: Request, res: Response){
-        //[rows] se usa para obtener el dato sin la conf de la bbdd
         const userId= req.userId;
-        // return await pool.query('SELECT * FROM carrito WHERE id = ?', userId);
         const productosEnCarrito = await Carrito.findAll({where: {id_cliente: userId}})
         return res.json(productosEnCarrito);
     }
 
     public async create (req: Request, res: Response): Promise<void> {
         const id_cliente = req.userId;
-        const {cantidad, precio_unitario, finalizado, marca, descripcion, img, categoria} = req.body;
-        const productoAgregado = await Carrito.create({
-            id_cliente,
-            cantidad,
-            precio_unitario,
-            marca,
-            img,
-            categoria,
-            descripcion,
-            finalizado
+        const {precio, marca, descripcion, img, categoriaId} = req.body;
+
+        await Carrito.create({
+            id_cliente: id_cliente,
+            precio_unitario: precio,
+            marca:  marca,
+            img: img,
+            categoria: categoriaId,
+            descripcion: descripcion,
+            finalizado: 0,
+            cantidad: 1 //aca tengo que obtener la cantidad del front
         });
         
         res.json({
@@ -46,8 +44,9 @@ class CarritoController{
     public async delete (req: Request, res: Response): Promise<void>{
         const { id } =  req.params;
         const id_cliente = req.userId;
-
-        const productoBorrado = await Carrito.destroy({
+        console.log(id + " " + id_cliente);
+        
+        await Carrito.destroy({
             where: {
                 id: id,
                 id_cliente: id_cliente

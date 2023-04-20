@@ -14,6 +14,7 @@ const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const homeRoutes_1 = __importDefault(require("./routes/homeRoutes"));
 const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
 const carritoRoutes_1 = __importDefault(require("./routes/carritoRoutes"));
+const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
 //Importo modelos para bbdd
 require("./models/Carrito");
 require("./models/Categoria");
@@ -41,6 +42,7 @@ class Server {
         this.app.use('/home', homeRoutes_1.default);
         this.app.use('/categorias', categoryRoutes_1.default);
         this.app.use('/carrito', carritoRoutes_1.default);
+        this.app.use('/cliente', clienteRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

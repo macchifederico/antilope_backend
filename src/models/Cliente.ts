@@ -13,6 +13,15 @@ export const Cliente = sequilize.define('clientes', {
     apellido:{
         type: DataTypes.STRING
     },
+    dni:{
+        type: DataTypes.INTEGER
+    },
+    telefono:{
+        type: DataTypes.INTEGER
+    },
+    esCelular:{
+        type: DataTypes.BOOLEAN
+    },
     email:{
         type: DataTypes.STRING
     },
