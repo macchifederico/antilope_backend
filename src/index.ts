@@ -1,7 +1,6 @@
 import express, {Application} from 'express';
 import morgan, { format } from 'morgan';
 import cors from 'cors';
-import dotenv from 'dotenv';
 
 import sequelize from './database' 
 
@@ -21,6 +20,8 @@ import './models/Cliente';
 import './models/Producto';
 import './models/Sucursal';
 
+require('dotenv').config();
+
 class Server {
     
     public app: Application;
@@ -32,7 +33,7 @@ class Server {
     }
 
     config(): void{
-        this.app.set('port', process.env.PORT || 3000);
+        this.app.set('port', process.env.PORT);
 
         this.app.use(morgan('dev'));
         this.app.use(cors());

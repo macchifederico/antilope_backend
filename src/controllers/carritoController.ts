@@ -12,6 +12,7 @@ class CarritoController{
 
     public async create (req: Request, res: Response): Promise<void> {
         const id_cliente = req.userId;
+        
         const {precio, marca, descripcion, img, categoriaId} = req.body;
 
         await Carrito.create({
@@ -25,7 +26,7 @@ class CarritoController{
             cantidad: 1 //aca tengo que obtener la cantidad del front
         });
         
-        res.json({
+        res.status(200).json({
             text: "Producto Guardado OK"
         })
     }
@@ -52,7 +53,7 @@ class CarritoController{
                 id_cliente: id_cliente
             }
         });
-        res.json({
+        res.status(200).json({
             text: "Producto borrado con éxito"
         })        
     }

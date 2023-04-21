@@ -9,18 +9,31 @@ class AuthController {
     public async registro(req: Request, res: Response){
         const {nombre, apellido, email, password} = req.body;
         const newCliente = await Cliente.create({
-            nombre,
-            apellido,
-            email,
-            password
+            nombre: nombre,
+            apellido: apellido,
+            email: email,
+            password: password
         });
-        const token = jwt.sign({_id: newCliente.id}, 'secretkey');
-        res.status(200).send({
-            token,
-            text: "Registro Exitoso"
-        });
-    }
 
+        const clienteExiste = await Cliente.findOne({
+            where: {
+                email: email
+            }
+        })
+        
+        if  (newCliente.dataValues.email === clienteExiste?.dataValues.email){
+            res.status(500).send({
+                text: "El usuario ya existe"
+            })
+        } else {
+            const token = jwt.sign({_id: newCliente.dataValues.id}, 'secretkey');
+            res.status(200).send({
+                token:token,
+                text: "Registro Exitoso"
+            });
+        }
+           
+    }
 
     public async login(req: Request, res: Response, next: any){
         const { email, password } = req.body; 
@@ -56,14 +69,8 @@ class AuthController {
             res.status(500).send({
                 text: "Usuario o password invalidos"
             })
-
         }
-        }
-        
-        // const [rows] = await pool.query('SELECT * FROM clientes WHERE email = ?', [email]);
-
-        
-    }
+    }}
 }
 
 

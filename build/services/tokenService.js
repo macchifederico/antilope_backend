@@ -17,7 +17,7 @@ class TokenService {
             return res.status(401).send('Request no autorizado');
         }
         const payload = jsonwebtoken_1.default.verify(token, 'secretkey');
-        req.userId = payload._id;
+        req.userId = String(payload._id);
         next();
     }
 }

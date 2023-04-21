@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import jwt from 'jsonwebtoken';
+import jwt, { Jwt, JwtPayload } from 'jsonwebtoken';
 
 class TokenService {
 
@@ -8,7 +8,7 @@ class TokenService {
     }
     
     verifyToken(req: Request, res: Response, next: any){     
-
+        
         if(!req.headers.authorization){
             return res.status(401).send('Request no autorizado');
         }
@@ -19,9 +19,10 @@ class TokenService {
                 return res.status(401).send('Request no autorizado');
         }
 
-        const payload = jwt.verify(token, 'secretkey');
+        const payload = jwt.verify(token, 'secretkey') as JwtPayload;
         
-        req.userId = payload._id;
+        req.userId = String(payload._id);
+
         next();
         }
     

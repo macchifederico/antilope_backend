@@ -21,7 +21,7 @@ class CarritoController {
             finalizado: 0,
             cantidad: 1 //aca tengo que obtener la cantidad del front
         });
-        res.json({
+        res.status(200).json({
             text: "Producto Guardado OK"
         });
     }
@@ -45,7 +45,7 @@ class CarritoController {
                 id_cliente: id_cliente
             }
         });
-        res.json({
+        res.status(200).json({
             text: "Producto borrado con éxito"
         });
     }
