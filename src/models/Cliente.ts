@@ -14,10 +14,10 @@ export const Cliente = sequilize.define('clientes', {
         type: DataTypes.STRING
     },
     dni:{
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
     },
     telefono:{
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
     },
     esCelular:{
         type: DataTypes.BOOLEAN
@@ -32,7 +32,7 @@ export const Cliente = sequilize.define('clientes', {
         type: DataTypes.STRING
     },
     codigoPostal: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
     }
 },{
     timestamps: false

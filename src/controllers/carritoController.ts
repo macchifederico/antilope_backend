@@ -6,7 +6,9 @@ class CarritoController{
 
     public async list (req: Request, res: Response){
         const userId= req.userId;
-        const productosEnCarrito = await Carrito.findAll({where: {id_cliente: userId}})
+        const productosEnCarrito = await Carrito.findAll({
+            where: {id_cliente: userId}
+        })
         return res.json(productosEnCarrito);
     }
 
@@ -31,21 +33,22 @@ class CarritoController{
         })
     }
     
-    // public async update (req: Request, res: Response): Promise<void>{
-    //     const { id } = req.params;
-    //     console.log(id);
-    //     console.log(req.body);
-    // }        
-    //     await pool.query('UPDATE productos SET ? WHERE id = ?', [req.body, id]);
-    //     res.json({
-    //         text: "Producto Actualizado OK"
-    //     })
-    // }
+    public async update (req: Request, res: Response): Promise<void>{
+        const {opcion} = req.body;
+        console.log(req.params);
+        
+        // if(opcion != 0){
+        //     await Carrito.update({
+
+        //     })
+        // }
+    }
 
     public async delete (req: Request, res: Response): Promise<void>{
+        
         const { id } =  req.params;
         const id_cliente = req.userId;
-        console.log(id + " " + id_cliente);
+        //console.log(id + " " + id_cliente);
         
         await Carrito.destroy({
             where: {
@@ -53,10 +56,23 @@ class CarritoController{
                 id_cliente: id_cliente
             }
         });
-        res.status(200).json({
+        res.status(200).send({
             text: "Producto borrado con éxito"
         })        
     }
+
+    public async deleteAll (req: Request, res: Response): Promise<void>{
+        const id_cliente = req.userId;
+        await Carrito.destroy({
+            where: {
+                id_cliente: id_cliente
+            }
+        });
+        res.status(200).send({
+            text: "Carrito borrado con éxito"
+        })        
+    }
+
 
 }
  

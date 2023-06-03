@@ -21,6 +21,7 @@ require("./models/Categoria");
 require("./models/Cliente");
 require("./models/Producto");
 require("./models/Sucursal");
+const sucursalesRoutes_1 = __importDefault(require("./routes/sucursalesRoutes"));
 require('dotenv').config();
 class Server {
     constructor() {
@@ -44,6 +45,7 @@ class Server {
         this.app.use('/categorias', categoryRoutes_1.default);
         this.app.use('/carrito', carritoRoutes_1.default);
         this.app.use('/cliente', clienteRoutes_1.default);
+        this.app.use('/sucursales', sucursalesRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

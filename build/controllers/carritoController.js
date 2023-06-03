@@ -5,7 +5,9 @@ const Carrito_1 = require("../models/Carrito");
 class CarritoController {
     async list(req, res) {
         const userId = req.userId;
-        const productosEnCarrito = await Carrito_1.Carrito.findAll({ where: { id_cliente: userId } });
+        const productosEnCarrito = await Carrito_1.Carrito.findAll({
+            where: { id_cliente: userId }
+        });
         return res.json(productosEnCarrito);
     }
     async create(req, res) {
@@ -25,28 +27,37 @@ class CarritoController {
             text: "Producto Guardado OK"
         });
     }
-    // public async update (req: Request, res: Response): Promise<void>{
-    //     const { id } = req.params;
-    //     console.log(id);
-    //     console.log(req.body);
-    // }        
-    //     await pool.query('UPDATE productos SET ? WHERE id = ?', [req.body, id]);
-    //     res.json({
-    //         text: "Producto Actualizado OK"
-    //     })
-    // }
+    async update(req, res) {
+        const { opcion } = req.body;
+        console.log(req.params);
+        // if(opcion != 0){
+        //     await Carrito.update({
+        //     })
+        // }
+    }
     async delete(req, res) {
         const { id } = req.params;
         const id_cliente = req.userId;
-        console.log(id + " " + id_cliente);
+        //console.log(id + " " + id_cliente);
         await Carrito_1.Carrito.destroy({
             where: {
                 id: id,
                 id_cliente: id_cliente
             }
         });
-        res.status(200).json({
+        res.status(200).send({
             text: "Producto borrado con éxito"
+        });
+    }
+    async deleteAll(req, res) {
+        const id_cliente = req.userId;
+        await Carrito_1.Carrito.destroy({
+            where: {
+                id_cliente: id_cliente
+            }
+        });
+        res.status(200).send({
+            text: "Carrito borrado con éxito"
         });
     }
 }

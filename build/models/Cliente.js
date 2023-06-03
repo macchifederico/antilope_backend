@@ -19,10 +19,10 @@ exports.Cliente = database_1.default.define('clientes', {
         type: sequelize_1.DataTypes.STRING
     },
     dni: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.STRING
     },
     telefono: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.STRING
     },
     esCelular: {
         type: sequelize_1.DataTypes.BOOLEAN
@@ -37,7 +37,7 @@ exports.Cliente = database_1.default.define('clientes', {
         type: sequelize_1.DataTypes.STRING
     },
     codigoPostal: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.STRING
     }
 }, {
     timestamps: false

@@ -15,8 +15,9 @@ class CarritoRoutes {
         this.router.get('/', tokenService_1.default.verifyToken, carritoController_1.default.list);
         // this.router.get('/:id', carritoController.getOne);
         this.router.post('/', tokenService_1.default.verifyToken, carritoController_1.default.create);
-        // this.router.put('/:id', tokenService.verifyToken,carritoController.update);
+        this.router.put('/', tokenService_1.default.verifyToken, carritoController_1.default.update);
         this.router.delete('/:id', tokenService_1.default.verifyToken, carritoController_1.default.delete);
+        this.router.delete('/', tokenService_1.default.verifyToken, carritoController_1.default.deleteAll);
     }
 }
 const carritoRoutes = new CarritoRoutes();

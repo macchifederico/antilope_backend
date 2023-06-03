@@ -1,5 +1,4 @@
 import { Router } from "express";
-import loginController from '../controllers/loginController';
 
 class LoginRoutes {
 
@@ -10,7 +9,6 @@ class LoginRoutes {
     }
 
     config(): void{
-        this.router.get('/', loginController.index);
     }
 }
 
