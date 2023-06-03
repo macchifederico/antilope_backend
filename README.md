@@ -1,3 +1,3 @@
 # antilope_backend
 
-API realizada con NodeJs utilizando Express
+API en proceso de armado, realizada con NodeJs utilizando Express
