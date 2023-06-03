@@ -16,7 +16,7 @@ class ProductosController{
             return res.json(producto);
         }
         res.json({
-            text: "El producto no existe"
+            text: "El producto no existe."
         })
     }
 
