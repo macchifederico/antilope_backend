@@ -15,13 +15,13 @@ const homeRoutes_1 = __importDefault(require("./routes/homeRoutes"));
 const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
 const carritoRoutes_1 = __importDefault(require("./routes/carritoRoutes"));
 const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
+const sucursalesRoutes_1 = __importDefault(require("./routes/sucursalesRoutes"));
 //Importo modelos para bbdd
 require("./models/Carrito");
 require("./models/Categoria");
 require("./models/Cliente");
 require("./models/Producto");
 require("./models/Sucursal");
-const sucursalesRoutes_1 = __importDefault(require("./routes/sucursalesRoutes"));
 require('dotenv').config();
 class Server {
     constructor() {
@@ -34,7 +34,7 @@ class Server {
         this.app.use((0, morgan_1.default)('dev'));
         this.app.use((0, cors_1.default)());
         this.app.use(express_1.default.json());
-        this.app.use(express_1.default.urlencoded({ extended: false }));
+        this.app.use(express_1.default.urlencoded({ extended: true }));
     }
     routes() {
         this.app.use('/', indexRoutes_1.default);
