@@ -27,14 +27,12 @@ class CarritoController {
             text: "Producto Guardado OK"
         });
     }
-    async update(req, res) {
-        const { opcion } = req.body;
-        console.log(req.params);
-        // if(opcion != 0){
-        //     await Carrito.update({
-        //     })
-        // }
-    }
+    // public async update (req: Request, res: Response): Promise<void>{
+    //     const id_cliente = req.userId;
+    //     const {opcion} = req.body;
+    //     if(opcion != 0){
+    //     }
+    // }
     async delete(req, res) {
         const { id } = req.params;
         const id_cliente = req.userId;
@@ -58,6 +56,20 @@ class CarritoController {
         });
         res.status(200).send({
             text: "Carrito borrado con éxito"
+        });
+    }
+    async updateEstado(req, res) {
+        const id = req.userId;
+        const { seleccion } = req.body;
+        await Carrito_1.Carrito.update({
+            finalizado: 1,
+        }, {
+            where: {
+                id_cliente: id
+            }
+        });
+        return res.json({
+            text: "Carrito finalizado con éxito"
         });
     }
 }

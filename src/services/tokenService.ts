@@ -24,7 +24,7 @@ class TokenService {
         req.userId = String(payload._id);
 
         next();
-        }
+    }
     
 }
 

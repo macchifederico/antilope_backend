@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Carrito } from "../models/Carrito";
+import { Cliente } from "../models/Cliente";
 
 class CarritoController{
 
@@ -33,16 +34,14 @@ class CarritoController{
         })
     }
     
-    public async update (req: Request, res: Response): Promise<void>{
-        const {opcion} = req.body;
-        console.log(req.params);
+    // public async update (req: Request, res: Response): Promise<void>{
+    //     const id_cliente = req.userId;
+    //     const {opcion} = req.body;
         
-        // if(opcion != 0){
-        //     await Carrito.update({
-
-        //     })
-        // }
-    }
+    //     if(opcion != 0){
+           
+    //     }
+    // }
 
     public async delete (req: Request, res: Response): Promise<void>{
         
@@ -73,6 +72,21 @@ class CarritoController{
         })        
     }
 
+    public async updateEstado(req: Request, res: Response){
+        const id = req.userId;
+        const {seleccion} = req.body;
+        await Carrito.update({
+            finalizado: 1,
+        },
+        {
+            where: {
+                id_cliente: id
+            }
+        });
+        return res.json({
+            text: "Carrito finalizado con éxito"
+        })
+    }
 
 }
  
