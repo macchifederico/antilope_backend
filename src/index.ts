@@ -13,6 +13,7 @@ import categoryRoutes from './routes/categoryRoutes';
 import carritoRoutes from './routes/carritoRoutes';
 import clienteRoutes from './routes/clienteRoutes';
 import sucursalesRoutes from './routes/sucursalesRoutes';
+import pedidosRoutes from './routes/pedidosRoutes';
 
 //Importo modelos para bbdd
 import './models/Carrito';
@@ -20,6 +21,7 @@ import './models/Categoria';
 import './models/Cliente';
 import './models/Producto';
 import './models/Sucursal';
+import './models/Pedido';
 
 require('dotenv').config();
 
@@ -53,6 +55,7 @@ class Server {
         this.app.use('/carrito', carritoRoutes);
         this.app.use('/cliente', clienteRoutes);
         this.app.use('/sucursales', sucursalesRoutes);
+        this.app.use('/pedido', pedidosRoutes);
     }
 
     start(): void{
